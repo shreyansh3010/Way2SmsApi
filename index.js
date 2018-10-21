@@ -17,7 +17,7 @@ app.post('/api/send', function(req, res) {
     var pass = req.body.pass;
 
     const start = async function() {
-    cookie = await way2sms.login(user.toString(), pass.toString);
+    cookie = await way2sms.login(user.toString(), pass.toString());
     await way2sms.send(cookie, mobile.toString(), mess.toString());
     }
     start()
