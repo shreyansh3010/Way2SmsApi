@@ -10,20 +10,32 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
+const start = async function(user,pass,mobile,msg) {
+    cookie = await way2sms.login(user, pass);
+    return await way2sms.send(cookie, mobile, msg);
+}
+
 app.post('/api/send', function(req, res) {
     var mobile = req.body.mobile;
-    var mess = req.body.mess;
+    var msg = req.body.msg;
     var user = req.body.user;
     var pass = req.body.pass;
-
-    const start = async function() {
-    cookie = await way2sms.login(user.toString(), pass.toString());
-    await way2sms.send(cookie, mobile.toString(), mess.toString());
+    if(start(user.toString(),pass.toString(),mobile.toString(),msg.toString())){
+        res.format({
+            'application/json': function(){
+               res.send({ status: 'Success', To: mobile.toString(), Message: msg.toString(), log: 'Send'});
+            }
+         });
     }
-    start()
-    
-        console.log(mobile+' '+mess);
-        res.send('Sent');
+    else{
+        res.format({
+            'application/json': function(){
+               res.send({ status: 'Fail', To: 'None', Message: 'None', log: 'Error'});
+            }
+         });
+    }
 });
  
-app.listen(port)
+app.listen(port, () => {
+    console.log('Server is up on port '+port);
+});
