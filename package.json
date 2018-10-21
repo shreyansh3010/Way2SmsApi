@@ -1,0 +1,24 @@
+{
+  "name": "way2smsapi",
+  "version": "1.0.0",
+  "description": "Send free sms from way2sms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SMS",
+    "Way2Sms",
+    "Node.js",
+    "Heroku",
+    "POST"
+  ],
+  "author": "Shreyansh Jain",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "way2sms": "^1.0.2"
+  }
+}
